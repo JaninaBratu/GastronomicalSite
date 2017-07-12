@@ -43,6 +43,9 @@ public class User {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Blog> blogs;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private List<Recipe> recipes;
 
 	public boolean isEnabled() {
 		return enabled;
@@ -100,4 +103,11 @@ public class User {
 		this.blogs = blogs;
 	}
 
+	public List<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(List<Recipe> recipes) {
+		this.recipes = recipes;
+	}
 }
