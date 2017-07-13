@@ -68,6 +68,10 @@
 								href='<spring:url value="/account.html" />'>My account</a></li>
 							<li><a href="<spring:url value="/logout" />">Logout</a></li>
 						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+						<li class="${current == 'recipes' ? 'active' : ''}"><a
+							href='<spring:url value="/user-recipes.html" />'>My recipes</a></li>
+						</security:authorize>	
 
 					</ul>
 				</div>
