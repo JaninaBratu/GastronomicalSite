@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -24,6 +26,9 @@ public class Recipe {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@ManyToMany(mappedBy = "messages")
+	private List<Message> messages;
+	
 	public Integer getId() {
 		return id;
 	}
