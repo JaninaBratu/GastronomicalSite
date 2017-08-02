@@ -14,10 +14,12 @@ import ro.ace.ucv.entity.Blog;
 import ro.ace.ucv.entity.Item;
 import ro.ace.ucv.entity.Role;
 import ro.ace.ucv.entity.User;
+import ro.ace.ucv.entity.Recipe;
 import ro.ace.ucv.repository.BlogRepository;
 import ro.ace.ucv.repository.ItemRepository;
 import ro.ace.ucv.repository.RoleRepository;
 import ro.ace.ucv.repository.UserRepository;
+import ro.ace.ucv.repository.RecipeRepository;
 
 @Service
 @Transactional
@@ -28,6 +30,10 @@ public class UserService {
 	
 	@Autowired
 	private BlogRepository blogRepository;
+
+	@Autowired
+	private RecipeRepository recipeRepository;
+
 	
 	@Autowired
 	private ItemRepository itemRepository;
@@ -51,6 +57,18 @@ public class UserService {
 			blog.setItems(items);
 		}
 		user.setBlogs(blogs);
+		return user;
+	}
+	
+	public User findOneWithRecipes(String name) {
+		User user = userRepository.findByName(name);
+		return findOneWithRecipes(user.getId());
+	}
+	
+	public User findOneWithRecipes(int id) {
+		User user = userRepository.findOne(id);
+		List<Recipe> recipes =  recipeRepository.findByUser(user);
+		user.setRecipes(recipes);
 		return user;
 	}
 
