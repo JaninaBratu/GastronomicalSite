@@ -26,7 +26,7 @@ public class Recipe {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToMany(mappedBy = "messages")
+	@ManyToMany(mappedBy = "recipe")
 	private List<Message> messages;
 	
 	public Integer getId() {
