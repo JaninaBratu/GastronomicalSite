@@ -5,10 +5,15 @@ import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import ro.ace.ucv.entity.Blog;
+import ro.ace.ucv.entity.Message;
 import ro.ace.ucv.entity.Recipe;
 import ro.ace.ucv.entity.User;
+import ro.ace.ucv.repository.MessageRepository;
 import ro.ace.ucv.repository.RecipeRepository;
 import ro.ace.ucv.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class RecipeService {
@@ -18,7 +23,11 @@ public class RecipeService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
+
+	@Autowired
+	private MessageRepository messageRepository;
+
+
 	public void save(Recipe recipe, String name) {
 		User user = userRepository.findByName(name);
 		recipe.setUser(user);
@@ -34,4 +43,12 @@ public class RecipeService {
 		return recipeRepository.findOne(id);
 	}
 
+	public Recipe findOneWithMessages(int recipeId){
+
+		Recipe recipe = recipeRepository.findOne(recipeId);
+		List<Message> messages =  messageRepository.findByRecipe(recipe);
+
+		recipe.setMessages(messages);
+		return recipe;
+	}
 }

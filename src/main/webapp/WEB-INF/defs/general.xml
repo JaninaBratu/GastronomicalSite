@@ -50,4 +50,10 @@
 		<put-attribute name="current" value="recipes" />
 	</definition>
 	
+	<definition name="recipe-details" extends="common">
+		<put-attribute name="title" value="My recipe details" />
+		<put-attribute name="body" value="/WEB-INF/jsp/recipe-details.jsp" />
+		<put-attribute name="current" value="recipes" />
+	</definition>
+	
 </tiles-definitions>

@@ -47,6 +47,9 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Recipe> recipes;
 
+	@OneToMany(mappedBy = "user")
+	private List<Message> messages;
+
 	public boolean isEnabled() {
 		return enabled;
 	}

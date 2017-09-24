@@ -59,13 +59,9 @@
   <div class="tab-content">
     <c:forEach items="${user.recipes}" var="recipe">
    		<div role="tabpanel" class="tab-pane active" id="recipe_${recipe.id}">
-	   		<h1>${recipe.title}</h1>
-			<p>
-			<a href='<spring:url value="/recipe/remove/${recipe.id}.html"/>' class="btn btn-danger triggerRemove">remove recipe</a>
-			
-			${recipe.content}</p>
-		
-		</div>
+	   		<a  href='<spring:url value="/recipe-details/${recipe.id}.html" />'>${recipe.title}</a>
+<%-- 	   		<h1>${recipe.title}</h1> --%>
+			</div>
      </c:forEach>
   </div>
   

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -13,6 +14,9 @@ public class Message {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	@Size(min = 3, message = "The message content must be at least 1 characters!")
+	private String message;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -46,5 +50,13 @@ public class Message {
 		this.recipe = recipe;
 	}
 
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 }
