@@ -75,7 +75,6 @@ public class RecipeController {
 		return "recipe-details";
 	}
 
-
 	@RequestMapping(value = "/recipe-details/add-comment/{recipeId}", method = RequestMethod.POST)
 	@ResponseBody
 	public String addRecipeComment(@PathVariable int recipeId, Model model, Principal principal) {
