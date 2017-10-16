@@ -75,12 +75,10 @@ public class RecipeController {
 		return "recipe-details";
 	}
 
-	@RequestMapping(value = "/recipe-details/add-comment/{recipeId}", method = RequestMethod.POST)
-	@ResponseBody
-	public String addRecipeComment(@PathVariable int recipeId, Model model, Principal principal) {
+	@RequestMapping(value = "/recipe-details/{recipeId}", method = RequestMethod.POST)
+	public String addRecipeComment(@PathVariable int recipeId, @Valid @ModelAttribute("message") Message message, Principal principal) {
 
-		String text = "message 1";
-		messageService.saveMessage(text, principal, recipeId);
+		messageService.saveMessage(message, principal, recipeId);
 		return "redirect:/recipe-details/" + recipeId + ".html";
 	}
 }

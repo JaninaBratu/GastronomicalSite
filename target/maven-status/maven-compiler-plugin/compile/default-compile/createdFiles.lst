@@ -22,7 +22,6 @@ ro\ace\ucv\annotation\UniqueUsername.class
 ro\ace\ucv\entity\Blog.class
 ro\ace\ucv\rss\TCloud.class
 ro\ace\ucv\rss\TRssItem.class
-ro\ace\ucv\controller\MessageController.class
 ro\ace\ucv\service\RecipeService.class
 ro\ace\ucv\service\MessageService.class
 ro\ace\ucv\rss\TGuid.class

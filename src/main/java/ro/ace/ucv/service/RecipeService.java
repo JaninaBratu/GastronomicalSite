@@ -47,7 +47,6 @@ public class RecipeService {
 
 		Recipe recipe = recipeRepository.findOne(recipeId);
 		List<Message> messages =  messageRepository.findByRecipe(recipe);
-
 		recipe.setMessages(messages);
 		return recipe;
 	}
