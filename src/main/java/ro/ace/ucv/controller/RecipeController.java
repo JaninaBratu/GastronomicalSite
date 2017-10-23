@@ -30,7 +30,9 @@ public class RecipeController {
 
 	@Autowired
 	private MessageService messageService;
-	
+
+	private Integer messageId;
+
 	@ModelAttribute("recipe")
 	public Recipe constructRecipe() {
 		return new Recipe();
@@ -58,6 +60,7 @@ public class RecipeController {
 		}
 		String name = principal.getName();
 		recipeService.save(recipe, name);
+		System.out.println("The id of the recipe added is: " + recipe.getId());
 		return "redirect:/user-recipes.html";
 	}
 
@@ -67,7 +70,15 @@ public class RecipeController {
 		recipeService.delete(recipe);
 		return "redirect:/user-recipes.html";
 	}
-	
+
+	@RequestMapping("/comment/remove/{id}")
+	public String removeComment(@PathVariable int id){
+		Message message  = messageService.findOne(id);
+		Integer recipeId = message.getRecipe().getId();
+		messageService.delete(message);
+		return "redirect:/recipe-details/" + recipeId + ".html";
+	}
+
 	@RequestMapping("/recipe-details/{id}")
 	public String getRecipeDetails(@PathVariable int id, Model model) {
 
@@ -78,7 +89,10 @@ public class RecipeController {
 	@RequestMapping(value = "/recipe-details/{recipeId}", method = RequestMethod.POST)
 	public String addRecipeComment(@PathVariable int recipeId, @Valid @ModelAttribute("message") Message message, Principal principal) {
 
-		messageService.saveMessage(message, principal, recipeId);
+		messageService.save(message, principal, recipeId);
+		System.out.println("The id of the comment added is: " + message.getId());
+		messageId = message.getId();
+		System.out.println("The message added is: " + message.getId() + " " + message.getMessage());
 		return "redirect:/recipe-details/" + recipeId + ".html";
 	}
 }
