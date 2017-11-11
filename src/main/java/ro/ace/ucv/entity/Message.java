@@ -1,10 +1,13 @@
 package ro.ace.ucv.entity;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 
 @Entity
+@Proxy(lazy=false)
 public class Message {
 
 	@Id

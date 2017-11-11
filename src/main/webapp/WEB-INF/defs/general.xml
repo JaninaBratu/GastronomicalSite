@@ -55,5 +55,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/recipe-details.jsp" />
 		<put-attribute name="current" value="recipes" />
 	</definition>
+
+	<definition name="edit-comment" extends="common">
+		<put-attribute name="title" value="Edit page" />
+		<put-attribute name="body" value="/WEB-INF/jsp/edit-comment.jsp" />
+		<put-attribute name="current" value="message" />
+	</definition>
 	
 </tiles-definitions>

@@ -37,8 +37,8 @@ public class RecipeController {
 	public Recipe constructRecipe() {
 		return new Recipe();
 	}
-	
-	
+
+
 	@ModelAttribute("message")
 	public Message constructMessage() {
 		return new Message();
@@ -90,9 +90,24 @@ public class RecipeController {
 	public String addRecipeComment(@PathVariable int recipeId, @Valid @ModelAttribute("message") Message message, Principal principal) {
 
 		messageService.save(message, principal, recipeId);
-		System.out.println("The id of the comment added is: " + message.getId());
-		messageId = message.getId();
-		System.out.println("The message added is: " + message.getId() + " " + message.getMessage());
 		return "redirect:/recipe-details/" + recipeId + ".html";
 	}
+
+	@RequestMapping("/edit-form/{messageId}")
+	public String goToEditForm(@PathVariable int messageId, Model model){
+		model.addAttribute("message", messageService.findOne(messageId));
+		return "edit-comment";
+	}
+
+	@RequestMapping(value = "/edit-comment/{messageId}" , method = RequestMethod.GET)
+	public String editComment(@PathVariable int messageId, @Valid @ModelAttribute("message") Message newMessage,
+							  Principal principal) {
+
+		Message message = messageService.getOne(messageId);
+		Integer recipeId = message.getRecipe().getId();
+		String userName = principal.getName();
+		messageService.edit(messageId, newMessage.getMessage(), userName);
+		return "redirect:/recipe-details/" + recipeId + ".html";
+}
+
 }
