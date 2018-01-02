@@ -2,10 +2,7 @@ package ro.ace.ucv.entity;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Role {
@@ -16,7 +13,7 @@ public class Role {
 
 	private String name;
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(fetch= FetchType.EAGER, mappedBy = "roles")
 	private List<User> users;
 
 	public Integer getId() {

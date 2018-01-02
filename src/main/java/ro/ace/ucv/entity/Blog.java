@@ -2,13 +2,7 @@ package ro.ace.ucv.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
@@ -31,7 +25,7 @@ public class Blog {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "blog", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch= FetchType.EAGER, mappedBy = "blog", cascade = CascadeType.REMOVE)
 	private List<Item> items;
 
 	public Integer getId() {

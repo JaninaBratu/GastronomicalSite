@@ -57,7 +57,7 @@ public class JsonUtil {
      };
 
 
-    public static HashMap<String, String> populateHashMap(String[] keyValues, String[] valueOfValues){
+/*    public static HashMap<String, String> populateHashMap(String[] keyValues, String[] valueOfValues){
 
         int sizeOfValues = keyValues.length;
         int i = 0;
@@ -66,19 +66,17 @@ public class JsonUtil {
             i++;
         }
         return contentCharacters;
-    }
+    }*/
 
     //TODO: convert from string to url - java method
     public static HashMap<String, String> getJsonValues(String value){
 
-        contentCharacters = populateHashMap(unreadableRegexValues, readableRegexValues);
         HashMap<String, String> jsonMap = new HashMap<String, String>();
         String[] temporatyValues = value.split(REGEX_AND);
 
         for(int i=0; i<temporatyValues.length; i++){
             String[] valuesToAdd = temporatyValues[i].split(REGEX_EQUAL);
-            String myValue = valuesToAdd[1].replaceAll(REGEX_SPECIAL_COMMA, REGEX_COMMA).replaceAll(REGEX_PLUS, REGEX_SPACE);
-            jsonMap.put(valuesToAdd[0], myValue);
+            jsonMap.put(valuesToAdd[0], valuesToAdd[1]);
         }
         return jsonMap;
     }

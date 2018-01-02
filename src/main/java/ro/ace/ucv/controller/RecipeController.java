@@ -1,5 +1,8 @@
 package ro.ace.ucv.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +76,11 @@ public class RecipeController {
 			return doGetUserRecipes(model, principal);
 		}
 		String name = principal.getName();
+		try {
+			requestContent = URLDecoder.decode(requestContent, StandardCharsets.UTF_8.toString());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		String title = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "title");
 		String content = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "content");
 		String categoryId = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "category");
@@ -81,8 +89,7 @@ public class RecipeController {
 		recipe.setTitle(title);
 		recipe.setContent(content);
 		recipe.setCategory(myCategory);
-		recipe.setCategory(myCategory);
- 		recipeService.save(recipe, name);
+		recipeService.save(recipe, name);
 		List<Recipe> myRecipeList = recipeService.findAll();
 		return "redirect:/user-recipes.html";
 	}
