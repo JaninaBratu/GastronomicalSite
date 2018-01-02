@@ -83,7 +83,7 @@ public class RecipeController {
 		recipe.setCategory(myCategory);
 		recipe.setCategory(myCategory);
  		recipeService.save(recipe, name);
-//		List<Recipe> myRecipeList = recipeService.findAll();
+		List<Recipe> myRecipeList = recipeService.findAll();
 		return "redirect:/user-recipes.html";
 	}
 

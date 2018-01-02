@@ -9,13 +9,76 @@ public class JsonUtil {
 
     private static final String REGEX_AND = "&";
     private static final String REGEX_EQUAL = "=";
+    private static final String REGEX_PLUS = "\\+";
+    private static final String REGEX_SPACE = " ";
+    private static final String REGEX_SPECIAL_COMMA = "%2C";
+    private static final String REGEX_COMMA = ",";
 
+    private static HashMap<String, String> contentCharacters = new HashMap<String, String>();
+
+    private static final String[] unreadableRegexValues =
+     {
+             "%2C", //comma
+             "\\+", //space
+             "%28", // left open bracket (
+             "%29", // right close bracket )
+             "%21", // !
+             "%3F", // ?
+             "%3B", // ;
+             "%3A", // :
+             "%22", // ""
+             "%2F", // /
+             "%5C", // \
+             "%5B", // [
+             "%5D", // ]
+             "%7B", // {
+             "%7D", // }
+             "%25" // percent %
+     };
+
+    private static final String[] readableRegexValues =
+     {
+          ",",
+          " ",
+          "\\(",
+          "\\)",
+          "\\!",
+          "\\?",
+          "\\;",
+          "\\:",
+          "\\\"", // ""
+          "\\/",
+          "\\\\", // \
+          "\\[",
+          "\\]",
+          "\\{",
+          "\\}",
+          "\\%"
+     };
+
+
+    public static HashMap<String, String> populateHashMap(String[] keyValues, String[] valueOfValues){
+
+        int sizeOfValues = keyValues.length;
+        int i = 0;
+        while(i<sizeOfValues){
+            contentCharacters.put(keyValues[i], valueOfValues[i]);
+            i++;
+        }
+        return contentCharacters;
+    }
+
+    //TODO: convert from string to url - java method
     public static HashMap<String, String> getJsonValues(String value){
+
+        contentCharacters = populateHashMap(unreadableRegexValues, readableRegexValues);
         HashMap<String, String> jsonMap = new HashMap<String, String>();
         String[] temporatyValues = value.split(REGEX_AND);
+
         for(int i=0; i<temporatyValues.length; i++){
             String[] valuesToAdd = temporatyValues[i].split(REGEX_EQUAL);
-            jsonMap.put(valuesToAdd[0], valuesToAdd[1]);
+            String myValue = valuesToAdd[1].replaceAll(REGEX_SPECIAL_COMMA, REGEX_COMMA).replaceAll(REGEX_PLUS, REGEX_SPACE);
+            jsonMap.put(valuesToAdd[0], myValue);
         }
         return jsonMap;
     }
