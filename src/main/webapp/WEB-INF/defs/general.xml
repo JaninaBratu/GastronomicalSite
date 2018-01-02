@@ -61,5 +61,5 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/edit-comment.jsp" />
 		<put-attribute name="current" value="message" />
 	</definition>
-	
+
 </tiles-definitions>

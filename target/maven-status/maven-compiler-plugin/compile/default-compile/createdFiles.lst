@@ -1,3 +1,4 @@
+ro\ace\ucv\entity\Category.class
 ro\ace\ucv\repository\MessageRepository.class
 ro\ace\ucv\repository\ItemRepository.class
 ro\ace\ucv\controller\IndexController.class
@@ -7,6 +8,7 @@ ro\ace\ucv\controller\AdminController.class
 ro\ace\ucv\repository\UserRepository.class
 ro\ace\ucv\controller\LoginController.class
 ro\ace\ucv\service\UserService.class
+ro\ace\ucv\utils\JsonUtil.class
 ro\ace\ucv\entity\Message.class
 ro\ace\ucv\entity\Recipe.class
 ro\ace\ucv\rss\TCategory.class
@@ -27,6 +29,7 @@ ro\ace\ucv\service\MessageService.class
 ro\ace\ucv\rss\TGuid.class
 ro\ace\ucv\repository\RoleRepository.class
 ro\ace\ucv\rss\TRss.class
+ro\ace\ucv\repository\CategoryRepository.class
 ro\ace\ucv\controller\RecipeController.class
 ro\ace\ucv\repository\RecipeRepository.class
 ro\ace\ucv\service\InitDbService.class
@@ -37,3 +40,4 @@ ro\ace\ucv\rss\ObjectFactory.class
 ro\ace\ucv\rss\TRssChannel.class
 ro\ace\ucv\rss\TImage.class
 ro\ace\ucv\annotation\UniqueUsernameValidator.class
+ro\ace\ucv\service\CategoryService.class

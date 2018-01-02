@@ -12,14 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ro.ace.ucv.entity.Blog;
-import ro.ace.ucv.entity.Item;
-import ro.ace.ucv.entity.Role;
-import ro.ace.ucv.entity.User;
-import ro.ace.ucv.repository.BlogRepository;
-import ro.ace.ucv.repository.ItemRepository;
-import ro.ace.ucv.repository.RoleRepository;
-import ro.ace.ucv.repository.UserRepository;
+import ro.ace.ucv.entity.*;
+import ro.ace.ucv.repository.*;
 
 @Transactional
 @Service
@@ -27,7 +21,13 @@ public class InitDbService {
 
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
+	@Autowired
+	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private RecipeRepository recipeRepository;
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -46,39 +46,40 @@ public class InitDbService {
 		Role roleAdmin = new Role();
 		roleAdmin.setName("ROLE_ADMIN");
 		roleRepository.save(roleAdmin);
-		
+
+		Category sweetCategory = new Category();
+		sweetCategory.setCategoryType("Sweet");
+		categoryRepository.save(sweetCategory);
+
+		Category soupCategory = new Category();
+		soupCategory.setCategoryType("Soup");
+		categoryRepository.save(soupCategory);
+
 		User userAdmin = new User();
 		userAdmin.setEnabled(true);
 		userAdmin.setName("admin");
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		userAdmin.setPassword(encoder.encode("admin"));
-		
-		List<Role> roles = new ArrayList<Role>(); 
+
+		List<Role> roles = new ArrayList<Role>();
 		roles.add(roleAdmin);
 		roles.add(roleUser);
 		userAdmin.setRoles(roles);
-		
+
 		userRepository.save(userAdmin);
-		
-		Blog blogJavavids = new Blog();
-		blogJavavids.setName("JavaVids");
-		blogJavavids.setUrl("http://www.feedforall.com/sample.xml");
-		blogJavavids.setUser(userAdmin);
-		blogRepository.save(blogJavavids);
-		
-		Item item1 =  new Item();
-		item1.setBlog(blogJavavids);
-		item1.setTitle("first");
-		item1.setLink("www.google.com");
-		item1.setPublishedDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-		itemRepository.save(item1);
-		
-		Item item2 =  new Item();
-		item2.setBlog(blogJavavids);
-		item2.setTitle("second");
-		item2.setLink("www.google.com");
-		item2.setPublishedDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-		itemRepository.save(item2);
-		
+
+		Recipe recipe = new Recipe();
+		recipe.setTitle("Tiramisu");
+		recipe.setContent("piscoturi, mascarpone, oua, cafea, cacao");
+		recipe.setCategory(categoryRepository.findOne(1));
+		recipe.setUser(userAdmin);
+		recipeRepository.save(recipe);
+
+		recipe = new Recipe();
+		recipe.setTitle("Supa de vacuta");
+		recipe.setContent("carne vita, legume, ou, verdeata");
+		recipe.setCategory(categoryRepository.findOne(2));
+		recipe.setUser(userAdmin);
+		recipeRepository.save(recipe);
 	}
 }

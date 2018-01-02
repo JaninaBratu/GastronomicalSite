@@ -1,11 +1,14 @@
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TCloudProtocol.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\CategoryRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Message.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TCloud.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Blog.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\UserService.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Category.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\BlogRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\RoleRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TRss.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\CategoryService.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Item.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\controller\RegisterController.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Rating.java
@@ -37,3 +40,4 @@ E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TEnclosure.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\RecipeRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\RecipeService.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\utils\JsonUtil.java

@@ -23,14 +23,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">New Recipe</h4>
       </div>
       <div class="modal-body">
         
 		<div class="form-group">
-			<label for="name" class="col-sm-2 control-label">Title:</label>
+			<label for="title" class="col-sm-2 control-label">Title:</label>
 			<div class="col-sm-10">
 				<form:input path="title" cssClass="form-control" />
 				<form:errors path="title"/>
@@ -38,14 +38,25 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="url" class="col-sm-2 control-label">Content:</label>
+			<label for="content" class="col-sm-2 control-label">Content:</label>
 			<div class="col-sm-10">
 				<form:input path="content" cssClass="form-control" />
 				<form:errors path="content"/>
 			</div>
 		</div>
-      </div>
-      <div class="modal-footer">
+
+          <div class="form-group">
+              <label for="content" class="col-sm-2 control-label">Category:</label>
+              <div class="col-sm-10">
+                  <form:select class="custom-select" path="category">
+                      <c:forEach items="${categories}" var="cat">
+                          <form:option value="${cat.id}">${cat.categoryType}</form:option>
+                      </c:forEach>
+                  </form:select>
+              </div>
+          </div>
+
+          <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <input type="submit" class="btn btn-primary" value="Save" />
       </div>
@@ -55,13 +66,15 @@
 </form:form>
 
 <br><br>
+
+</div>
+
 <!-- Tab panes -->
-  <div class="tab-content">
+<div class="tab-content">
+    eeeee
     <c:forEach items="${user.recipes}" var="recipe">
-   		<div role="tabpanel" class="tab-pane active" id="recipe_${recipe.id}">
-	   		<a  href='<spring:url value="/recipe-details/${recipe.id}.html" />'>${recipe.title}</a>
-<%-- 	   		<h1>${recipe.title}</h1> --%>
-			</div>
-     </c:forEach>
-  </div>
-  
+        <div role="tabpanel" class="tab-pane active" id="recipe_${recipe.id}">
+            <a  href='<spring:url value="/recipe-details/${recipe.id}.html" />'>${recipe.title}</a>
+        </div>
+    </c:forEach>
+</div>

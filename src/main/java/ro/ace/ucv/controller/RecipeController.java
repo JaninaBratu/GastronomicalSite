@@ -1,9 +1,12 @@
 package ro.ace.ucv.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +14,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import ro.ace.ucv.entity.Category;
 import ro.ace.ucv.entity.Recipe;
 import ro.ace.ucv.entity.Message;
+import ro.ace.ucv.repository.CategoryRepository;
+import ro.ace.ucv.service.CategoryService;
 import ro.ace.ucv.service.MessageService;
 import ro.ace.ucv.service.RecipeService;
 import ro.ace.ucv.service.UserService;
+import ro.ace.ucv.utils.*;
 
 @Controller
 public class RecipeController {
@@ -23,44 +30,60 @@ public class RecipeController {
 	@Autowired
 	private UserService userService;
 
-
 	@Autowired
 	private RecipeService recipeService;
 
-
 	@Autowired
 	private MessageService messageService;
-
 	private Integer messageId;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@ModelAttribute("recipe")
 	public Recipe constructRecipe() {
 		return new Recipe();
 	}
 
+	@ModelAttribute("category")
+	public Category constructCategory() {
+		return new Category();
+	}
 
 	@ModelAttribute("message")
 	public Message constructMessage() {
 		return new Message();
 	}
-	
-	
+
+
 	@RequestMapping("/user-recipes")
-	public String doGetuserRecipes(Model model, Principal principal) {
+	public String doGetUserRecipes(Model model, Principal principal) {
 		String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithRecipes(name));
+
+		List<Category> categories = categoryService.getListOfCategories();
+		model.addAttribute("categories", categories);
 		return "user-recipes";
 	}
 
 	@RequestMapping(value = "/user-recipes", method = RequestMethod.POST)
-	public String doAddRecipe(Model model, @Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result, Principal principal) {
-		
+	public String doAddRecipe(Principal principal, @RequestBody String requestContent, BindingResult result, Model model) {
+
 		if(result.hasErrors()) {
-			return doGetuserRecipes(model, principal);
+			return doGetUserRecipes(model, principal);
 		}
 		String name = principal.getName();
-		recipeService.save(recipe, name);
-		System.out.println("The id of the recipe added is: " + recipe.getId());
+		String title = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "title");
+		String content = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "content");
+		String categoryId = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "category");
+		Recipe recipe = new Recipe();
+		Category myCategory = categoryService.findOne(Integer.valueOf(categoryId));
+		recipe.setTitle(title);
+		recipe.setContent(content);
+		recipe.setCategory(myCategory);
+		recipe.setCategory(myCategory);
+ 		recipeService.save(recipe, name);
+//		List<Recipe> myRecipeList = recipeService.findAll();
 		return "redirect:/user-recipes.html";
 	}
 

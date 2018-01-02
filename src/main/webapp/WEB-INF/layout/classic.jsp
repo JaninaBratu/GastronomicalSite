@@ -75,9 +75,8 @@
 							<li class="${current == 'recipes' ? 'active' : ''}"><a
 								href='<spring:url value="/user-recipes.html" />'>My recipes</a>
 							</li>
-						</security:authorize>	
-
-					</ul>
+						</security:authorize>
+						</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>

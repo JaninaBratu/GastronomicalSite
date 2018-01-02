@@ -21,8 +21,12 @@ public class Recipe {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "recipe")
+	@OneToMany(fetch=FetchType.EAGER ,mappedBy = "recipe")
 	private List<Message> messages;
+
+	@ManyToOne
+	@JoinColumn (name = "category_id")
+	private Category category;
 
 	public Integer getId() {
 		return id;
@@ -60,7 +64,13 @@ public class Recipe {
 		return messages;
 	}
 
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
+	public void setMessages(List<Message> messages) { this.messages = messages; }
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }
