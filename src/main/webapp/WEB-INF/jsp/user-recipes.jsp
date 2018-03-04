@@ -56,6 +56,17 @@
               </div>
           </div>
 
+          <div class="form-group">
+              <label for="content" class="col-sm-2 control-label">Rating:</label>
+              <div class="col-sm-10">
+                  <form:select class="custom-select" path="rating">
+                      <c:forEach items="${ratings}" var="rat">
+                          <form:option value="${rat.id}">${rat.ratingValue}</form:option>
+                      </c:forEach>
+                  </form:select>
+              </div>
+          </div>
+
           <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <input type="submit" class="btn btn-primary" value="Save" />

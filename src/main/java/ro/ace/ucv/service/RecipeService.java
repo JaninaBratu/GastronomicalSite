@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
-import ro.ace.ucv.entity.*;
+import ro.ace.ucv.entity.Category;
+import ro.ace.ucv.entity.Message;
+import ro.ace.ucv.entity.Recipe;
+import ro.ace.ucv.entity.User;
 import ro.ace.ucv.repository.CategoryRepository;
 import ro.ace.ucv.repository.MessageRepository;
 import ro.ace.ucv.repository.RecipeRepository;
@@ -35,7 +37,7 @@ public class RecipeService {
 		recipeRepository.save(recipe);
 	}
 
-	@PreAuthorize("#recipe.user.name == authentication.name")
+	@PreAuthorize("recipe.user.name == authentication.name")
 	public void delete(@P("recipe") Recipe recipe) {
 		recipeRepository.delete(recipe);
 	}

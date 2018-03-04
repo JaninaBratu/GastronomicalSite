@@ -15,6 +15,7 @@ ro\ace\ucv\rss\TCategory.class
 ro\ace\ucv\rss\TEnclosure.class
 ro\ace\ucv\controller\RatingController.class
 ro\ace\ucv\entity\Role.class
+ro\ace\ucv\repository\RatingRepository.class
 ro\ace\ucv\rss\TCloudProtocol.class
 ro\ace\ucv\controller\RegisterController.class
 ro\ace\ucv\controller\UserController.class
@@ -30,6 +31,7 @@ ro\ace\ucv\rss\TGuid.class
 ro\ace\ucv\repository\RoleRepository.class
 ro\ace\ucv\rss\TRss.class
 ro\ace\ucv\repository\CategoryRepository.class
+ro\ace\ucv\service\RatingService.class
 ro\ace\ucv\controller\RecipeController.class
 ro\ace\ucv\repository\RecipeRepository.class
 ro\ace\ucv\service\InitDbService.class

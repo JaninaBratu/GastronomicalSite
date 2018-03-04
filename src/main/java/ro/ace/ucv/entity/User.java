@@ -43,9 +43,12 @@ public class User {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Blog> blogs;
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Recipe> recipes;
+
+	@OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
+	private List<Rating> ratings;
 
 	@OneToMany(mappedBy = "user")
 	private List<Message> messages;
@@ -112,5 +115,21 @@ public class User {
 
 	public void setRecipes(List<Recipe> recipes) {
 		this.recipes = recipes;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
 	}
 }

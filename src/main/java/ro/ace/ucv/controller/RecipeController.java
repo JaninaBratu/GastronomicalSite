@@ -4,12 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 import ro.ace.ucv.entity.Category;
+import ro.ace.ucv.entity.Rating;
 import ro.ace.ucv.entity.Recipe;
 import ro.ace.ucv.entity.Message;
-import ro.ace.ucv.repository.CategoryRepository;
-import ro.ace.ucv.service.CategoryService;
-import ro.ace.ucv.service.MessageService;
-import ro.ace.ucv.service.RecipeService;
-import ro.ace.ucv.service.UserService;
+import ro.ace.ucv.service.*;
 import ro.ace.ucv.utils.*;
 
 @Controller
@@ -42,6 +40,9 @@ public class RecipeController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private RatingService ratingService;
 
 	@ModelAttribute("recipe")
 	public Recipe constructRecipe() {
@@ -65,7 +66,9 @@ public class RecipeController {
 		model.addAttribute("user", userService.findOneWithRecipes(name));
 
 		List<Category> categories = categoryService.getListOfCategories();
+		List<Rating> ratings = ratingService.getListOfRatings();
 		model.addAttribute("categories", categories);
+		model.addAttribute("ratings",ratings);
 		return "user-recipes";
 	}
 
@@ -84,11 +87,21 @@ public class RecipeController {
 		String title = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "title");
 		String content = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "content");
 		String categoryId = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "category");
+		String ratingId = JsonUtil.getValueByFilter(JsonUtil.getJsonValues(requestContent), "rating");
 		Recipe recipe = new Recipe();
 		Category myCategory = categoryService.findOne(Integer.valueOf(categoryId));
+		Rating rating = ratingService.findOne(Integer.valueOf(ratingId));
+		List<Rating> ratings = new ArrayList<Rating>();
 		recipe.setTitle(title);
 		recipe.setContent(content);
 		recipe.setCategory(myCategory);
+		recipe.setRating(rating);
+		ratings.add(rating);
+		recipe.setRatings(ratings);
+		LocalDate localDate = LocalDate.now();
+		String creationDate = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(localDate);
+		recipe.setCreationDate(creationDate);
+		rating.setRecipe(recipe);
 		recipeService.save(recipe, name);
 		List<Recipe> myRecipeList = recipeService.findAll();
 		return "redirect:/user-recipes.html";

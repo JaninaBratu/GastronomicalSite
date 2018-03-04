@@ -12,8 +12,10 @@ E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Item.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\controller\RegisterController.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\entity\Rating.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\RatingRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\ObjectFactory.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TRssItem.java
+E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\service\RatingService.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\ItemRepository.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\rss\TSource.java
 E:\Dizertatie_2017\java-blog-aggregator-master\src\main\java\ro\ace\ucv\repository\UserRepository.java

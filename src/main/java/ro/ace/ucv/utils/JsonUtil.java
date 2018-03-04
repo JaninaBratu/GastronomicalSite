@@ -14,62 +14,7 @@ public class JsonUtil {
     private static final String REGEX_SPECIAL_COMMA = "%2C";
     private static final String REGEX_COMMA = ",";
 
-    private static HashMap<String, String> contentCharacters = new HashMap<String, String>();
-
-    private static final String[] unreadableRegexValues =
-     {
-             "%2C", //comma
-             "\\+", //space
-             "%28", // left open bracket (
-             "%29", // right close bracket )
-             "%21", // !
-             "%3F", // ?
-             "%3B", // ;
-             "%3A", // :
-             "%22", // ""
-             "%2F", // /
-             "%5C", // \
-             "%5B", // [
-             "%5D", // ]
-             "%7B", // {
-             "%7D", // }
-             "%25" // percent %
-     };
-
-    private static final String[] readableRegexValues =
-     {
-          ",",
-          " ",
-          "\\(",
-          "\\)",
-          "\\!",
-          "\\?",
-          "\\;",
-          "\\:",
-          "\\\"", // ""
-          "\\/",
-          "\\\\", // \
-          "\\[",
-          "\\]",
-          "\\{",
-          "\\}",
-          "\\%"
-     };
-
-
-/*    public static HashMap<String, String> populateHashMap(String[] keyValues, String[] valueOfValues){
-
-        int sizeOfValues = keyValues.length;
-        int i = 0;
-        while(i<sizeOfValues){
-            contentCharacters.put(keyValues[i], valueOfValues[i]);
-            i++;
-        }
-        return contentCharacters;
-    }*/
-
-    //TODO: convert from string to url - java method
-    public static HashMap<String, String> getJsonValues(String value){
+     public static HashMap<String, String> getJsonValues(String value){
 
         HashMap<String, String> jsonMap = new HashMap<String, String>();
         String[] temporatyValues = value.split(REGEX_AND);

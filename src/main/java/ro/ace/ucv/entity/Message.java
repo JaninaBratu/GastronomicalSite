@@ -24,7 +24,9 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
-	
+
+	private String creationDate;
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,4 +60,11 @@ public class Message {
 		this.message = message;
 	}
 
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
 }
