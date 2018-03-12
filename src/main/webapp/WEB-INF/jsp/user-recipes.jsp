@@ -82,10 +82,14 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-    eeeee
     <c:forEach items="${user.recipes}" var="recipe">
         <div role="tabpanel" class="tab-pane active" id="recipe_${recipe.id}">
             <a  href='<spring:url value="/recipe-details/${recipe.id}.html" />'>${recipe.title}</a>
         </div>
     </c:forEach>
 </div>
+
+<form>
+    <input type="submit" name="sortAsc" value ="true">Ascending</input>
+    <input type="submit" name="sortAsc" value="false">Descending</input>
+</form>

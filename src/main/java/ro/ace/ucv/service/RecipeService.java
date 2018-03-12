@@ -1,6 +1,12 @@
 package ro.ace.ucv.service;
 
+import net.turnbig.qb.QueryBuilder;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -13,6 +19,7 @@ import ro.ace.ucv.repository.MessageRepository;
 import ro.ace.ucv.repository.RecipeRepository;
 import ro.ace.ucv.repository.UserRepository;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -62,4 +69,23 @@ public class RecipeService {
 	public List<Recipe> findAll() {
 		return recipeRepository.findAll();
 	}
+
+	public List<Recipe> sortRecipeList(boolean isAsc){
+
+        Session session = null;
+        Query orderByClause = null;
+	    if(isAsc){
+            orderByClause = session
+                    .createQuery("select rec from Recipe rec order by rec.id asc");
+
+        }else{
+            orderByClause = session
+                    .createQuery("select rec from Recipe rec order by rec.id desc");
+        }
+
+        List<Recipe> recipeList = orderByClause.list();
+       /* Iterator<Recipe> it = recipeList.iterator(); //orderByClause.iterate();*/
+
+	    return recipeList;
+    }
 }

@@ -72,6 +72,12 @@ public class RecipeController {
 		return "user-recipes";
 	}
 
+    @RequestMapping(value = "/user-recipes/{sortAsc}", method = RequestMethod.GET)
+    public String sortList(@PathVariable boolean sortAsc){
+        recipeService.sortRecipeList(sortAsc);
+        return "redirect:/user-recipes/" + sortAsc + ".html";
+    }
+
 	@RequestMapping(value = "/user-recipes", method = RequestMethod.POST)
 	public String doAddRecipe(Principal principal, @RequestBody String requestContent, BindingResult result, Model model) {
 

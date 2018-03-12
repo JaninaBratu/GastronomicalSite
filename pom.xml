@@ -45,6 +45,13 @@
 			<version>4.3.4.Final</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.turnbig/query-builder -->
+		<dependency>
+			<groupId>net.turnbig</groupId>
+			<artifactId>query-builder</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
 		<!-- Core utilities used by other modules. Define this if you use Spring 
 			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
 		<dependency>
